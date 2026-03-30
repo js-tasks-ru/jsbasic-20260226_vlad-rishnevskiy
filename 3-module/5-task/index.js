@@ -1,3 +1,7 @@
 function getMinMax(str) {
-  // ваш код...
+  let num = str.split(",").join(" ").split(" ").filter((item) => parseFloat(item));
+  return {
+    min: Math.min(...num),
+    max: Math.max(...num),
+  };
 }
