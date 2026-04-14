@@ -1,23 +1,22 @@
 function highlight(table) {
-  const rows = table.querySelectorAll('tbody tr');
+  const rows = table.querySelectorAll('tr');
 
   rows.forEach(row => {
     const cells = row.querySelectorAll('td');
+    if (cells.length === 0) return;
 
     const age = Number(cells[1].textContent);
     const gender = cells[2].textContent;
     const statusCell = cells[3];
 
-    if (!statusCell.hasAttribute('data-available')) {
-      row.hidden = true;
-    } else {
-      const available = statusCell.dataset.available;
+    const availableAttr = statusCell.getAttribute('data-available');
 
-      if (available === 'true') {
-        row.classList.add('available');
-      } else {
-        row.classList.add('unavailable');
-      }
+    if (availableAttr === null) {
+      row.hidden = true;
+    } else if (availableAttr === 'true') {
+      row.classList.add('available');
+    } else if (availableAttr === 'false') {
+      row.classList.add('unavailable');
     }
 
     if (gender === 'm') {
